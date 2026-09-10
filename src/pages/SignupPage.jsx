@@ -440,7 +440,20 @@ export default function SignupPage({ onNavigateLogin, onNavigateHome, onSignupSu
           </div>
 
           <div className="absolute inset-0 cursor-grab active:cursor-grabbing">
-            <Canvas camera={{ position: [0, 0, 4.2], fov: 45 }}>
+            <Canvas 
+  camera={{ position: [0, 2.2, 4.0], fov: 42 }}
+  gl={{ 
+    powerPreference: "default", 
+    antialias: true,
+    preserveDrawingBuffer: false,
+    alpha: true 
+  }}
+  onCreated={({ gl }) => {
+    gl.domElement.addEventListener("webglcontextlost", (event) => {
+      event.preventDefault();
+    }, false);
+  }}
+>
               <ambientLight intensity={0.7} />
               <directionalLight position={[4, 5, 4]} intensity={1.5} />
               <pointLight position={[-3, -2, 2]} intensity={1.2} color={theme.accentGlow} />
